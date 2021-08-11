@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/logan/ros1_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/logan/catkin_ws/src/beginner_tutorials/include/**",
+        "/home/logan/ros1_ws/src/ros1_app_cpp/include/**",
+        "/home/logan/ros1_ws/src/ros_essentials_cpp/include/**",
+        "/home/logan/ros1_ws/src/sun_auv/include/**",
+        "/home/logan/ros1_ws/src/turtlebot3_simulations/turtlebot3_fake/include/**",
+        "/home/logan/ros1_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/logan/ros1_ws/src/turtlebot3/turtlebot3_slam/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

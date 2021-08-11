@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SUN_AUV PROJECT BY JEVAN NAIDOO (2021) -->
+<!-- This file is used by sim_sun_auv.launch and provides the URDF/XACRO spec for the robot inserted into gazebo -->
+<!-- After robot appears in the gazebo, delete the robot & change mass, geometry here and re-spawn for new test observation -->
+<robot name="sun_auv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Colours for RVIZ for geometric elements -->
+    <material name="green">
+        <color rgba="0 0.8 0 1"/>
+    </material>
+
+
+	<!-- * * * Link Definitions * * * -->
+    
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+      <origin xyz="0 0 0.050" rpy="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+    </joint>
+    
+    <link name="base_link">
+ 	    <visual>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_main_enclosure.dae"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_main_enclosure.dae"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="2"/>
+            <inertia ixx="0.00576" ixy="0.0" ixz="0.0" iyy="0.00576" iyz="0.0" izz="0.00576"/>
+        </inertial>
+     </link>
+
+    <joint name="wing_rhs_joint" type="fixed">
+      <origin xyz="0 -0.070 0.050" rpy="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="wing_rhs_link"/>
+    </joint>
+    
+    <link name="wing_rhs_link">
+ 	    <visual>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_wing.dae"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_wing.dae"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.5"/>
+            <inertia ixx="0.00576" ixy="0.0" ixz="0.0" iyy="0.00576" iyz="0.0" izz="0.00576"/>
+        </inertial>
+     </link>
+
+    <joint name="wing_lhs_joint" type="fixed">
+      <origin xyz="0 0.070 0.050" rpy="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="wing_lhs_link"/>
+    </joint>
+    
+    <link name="wing_lhs_link">
+ 	    <visual>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_wing.dae"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_wing.dae"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.5"/>
+            <inertia ixx="0.00576" ixy="0.0" ixz="0.0" iyy="0.00576" iyz="0.0" izz="0.00576"/>
+        </inertial>
+    </link>
+
+    <joint name="thruster_lhs_joint" type="fixed">
+      <origin xyz="0 0.060 0.000" rpy="0 0 0"/>
+      <parent link="wing_lhs_link"/>
+      <child link="thruster_lhs_link"/>
+    </joint>
+   
+    <link name="thruster_lhs_link">
+ 	    <visual>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_thruster_fl.dae"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://sun_auv/meshes/auv_thruster_fl.dae"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.5"/>
+            <inertia ixx="0.00576" ixy="0.0" ixz="0.0" iyy="0.00576" iyz="0.0" izz="0.00576"/>
+        </inertial>
+    </link>
+
+
+    <gazebo reference="base_link">
+        <kp>100000.0</kp>
+        <kd>100000.0</kd>
+        <mu1>10.0</mu1>
+        <mu2>10.0</mu2>
+        <material>Gazebo/Green</material>
+    </gazebo>
+    
+    <gazebo>
+        <plugin name="bouyancy_plugin" filename="libBuoyancyPlugin.so">
+          <fluid_density>1000</fluid_density>
+        </plugin>
+    </gazebo>
+
+</robot>
